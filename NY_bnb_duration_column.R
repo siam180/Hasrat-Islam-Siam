@@ -1,0 +1,15 @@
+ny <- read.csv("C://Users//siam_//Desktop//CSDA 1010//Lab 2//ny_bnb_listings.csv")
+str(ny)
+summary(ny)
+library(psych)
+library(dplyr)
+library(openair)
+duration <- ny$minimum_nights
+longstay <- ifelse(duration > 7, 1, 0)
+shortstay <- ifelse(duration <=7, 1, 0)
+ny <- mutate(ny, longstay)
+ny <- mutate(ny, shortstay)
+timeofstay <- ny$shortstay
+duration <- ifelse(timeofstay == 1, 'short', 'long')
+nybnb <- mutate(ny, duration)
+write.csv(nybnb,'NY_Lab2.csv')
